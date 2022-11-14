@@ -16,24 +16,26 @@ class LogParser
              .join("\n")
   end
 
+  private
+  
   def parse_log_file(name_with_relative_path)
-    array = File.readlines(name_with_relative_path, chomp: true).map { |node| node.split }
-  end
+      array = File.readlines(name_with_relative_path, chomp: true).map { |node| node.split }
+    end
 
-  def find_unique_entries(file_rows)
-    file_rows.uniq
-  end
+    def find_unique_entries(file_rows)
+      file_rows.uniq
+    end
 
-  def find_pages(file_rows)
-    file_rows.map { |node| node[0] }.uniq
-  end
+    def find_pages(file_rows)
+      file_rows.map { |node| node[0] }.uniq
+    end
 
-  def select_entry_times(page, unique_file_rows)
-    unique_file_rows.select { |row| row[0] == page }.length
-  end
+    def select_entry_times(page, unique_file_rows)
+      unique_file_rows.select { |row| row[0] == page }.length
+    end
 
-  def pluralize_view(number)
-    return "view" if number == 1
-    "views"
-  end
+    def pluralize_view(number)
+      return "view" if number == 1
+      "views"
+    end
 end
