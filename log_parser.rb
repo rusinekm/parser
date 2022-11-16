@@ -11,13 +11,13 @@ class LogParser
     unique_entries = find_unique_entries(@file_rows)
     find_pages(@file_rows)
              .map { |page_name| [page_name, select_entry_times(page_name, unique_entries)] }
-             .sort { |entry, second_entry| second_entry[1] <=> entry[1] }
+             .sort_by { |entry| [-entry[1], entry[0]] }
              .map { |entry| "#{entry[0]} #{entry[1]} unique #{pluralize_view(entry[1])}" }
              .join("\n")
   end
 
   private
-  
+
   def parse_log_file(name_with_relative_path)
       array = File.readlines(name_with_relative_path, chomp: true).map { |node| node.split }
     end

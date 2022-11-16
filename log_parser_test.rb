@@ -18,6 +18,15 @@ class LogParserTest < Test::Unit::TestCase
 /test/3 1 unique view"
   end
 
+  def test_searching_and_sorting_by_name
+    ARGV.replace ["webserver_test_3.log"]
+
+    assert_equal LogParser.new.start, "/test/1 3 unique views
+/test/4 3 unique views
+/test/2 2 unique views
+/test/3 1 unique view"
+  end
+
   def test_checking_non_existing_file
     ARGV.replace ["non_existing_file"]
 
